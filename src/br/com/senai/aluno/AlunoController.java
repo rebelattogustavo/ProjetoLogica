@@ -3,10 +3,10 @@ package br.com.senai.aluno;
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.senai.aluno.Aluno;
+
 public class AlunoController {
 
-	Scanner tec = new Scanner(System.in);
+Scanner tec = new Scanner(System.in);
 	
 	
 	
@@ -21,22 +21,19 @@ public class AlunoController {
 		
 		System.out.println("--- CADASTRAR ALUNO ---");
 		System.out.print("Informe nome: ");
-		tec.nextLine();
+		aluno.setNome(tec.next());
 		
 		System.out.print("Informe a idade: ");
-		tec.nextInt();
+		aluno.setIdade(tec.nextInt());
 		
 		System.out.print("Informe o país: ");
-		tec.nextLine();
-		aluno.setNomeDoPais(tec.nextLine());
+		aluno.setNomeDoPais(tec.next());
 		
 		System.out.print("Informe o nome do estado: ");
-		tec.nextLine();
-		aluno.setNomeDoEstado(tec.nextLine());
+		aluno.setNomeDoEstado(tec.next());
 		
 		System.out.print("Informe o nome da cidade: ");
-		tec.nextLine();
-		aluno.setNomeDaCidade(tec.nextLine());
+		aluno.setNomeDaCidade(tec.next());
 		
 		return aluno;
 	}
@@ -92,7 +89,7 @@ public class AlunoController {
 			aluno.setNomeDoPais(alunos.get(idAluno).getNomeDoPais());
 			aluno.setNomeDoEstado(alunos.get(idAluno).getNomeDoEstado());
 			aluno.setNomeDaCidade(alunos.get(idAluno).getNomeDaCidade());
-			
+			aluno.setIdade(alunos.get(idAluno).getIdade());
 			
 			alunos.set(idAluno, aluno);
 			
@@ -102,8 +99,66 @@ public class AlunoController {
 			System.out.println("--- EDITAR IDADE DO ALUNO ---");
 			System.out.print("Informe a nova idade: ");
 			tec.nextInt();
-			aluno.set
+			aluno.setIdade(tec.nextInt());
+		
+			aluno.setNomeDoPais(alunos.get(idAluno).getNomeDoPais());
+			aluno.setNomeDoEstado(alunos.get(idAluno).getNomeDoEstado());
+			aluno.setNomeDaCidade(alunos.get(idAluno).getNomeDaCidade());
+			aluno.setNome(alunos.get(idAluno).getNome());
+			
 		}
 		return alunos;
 	}	
+	
+	public void excluirAluno(List<Aluno> alunos) {
+			
+			listarAlunos(alunos);
+			
+			if(alunos.isEmpty()) {
+				return;
+			}
+			
+			System.out.println("--- EXCLUIR ALUNO ---");
+			
+			System.out.print("Informe o id do aluno para excluir: ");
+			int idAluno = tec.nextInt() - 1;
+			
+			if(alunos.size() <= idAluno) {
+				System.out.println("Aluno não cadastrado.");
+				return;
+			}
+			
+			alunos.remove(idAluno);
+		}
+	
+	
+	
+	public void menuAluno(List<Aluno> alunos) {
+		System.out.println("--- MENU ALUNOS ---");
+		System.out.println("1) Cadastrar aluno");
+		System.out.println("2) Listar aluno");
+		System.out.println("3) Editar aluno");
+		System.out.println("4) Excluir aluno");
+		System.out.println("--------------------");
+		System.out.print("Informe a opção que deseja: ");
+		int opcao = tec.nextInt();
+		
+		switch(opcao) {
+		case 1:
+			alunos.add(cadastrarAluno());
+			break;
+		case 2: 
+			listarAlunos(alunos);
+			break;
+		case 3: 
+			editarAluno(alunos);
+			break;
+		case 4:
+			excluirAluno(alunos);
+			break;
+		default:
+			System.out.println("Opçao inválida");
+			break;
+	}
+}
 }

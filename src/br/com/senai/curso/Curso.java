@@ -1,7 +1,9 @@
 package br.com.senai.curso;
 
-public class Curso {
+import br.com.senai.aluno.Aluno;
 
+public class Curso extends Aluno {
+	
 	private String nomeDoCurso;
 
 	public String getNomeDoCurso() {
